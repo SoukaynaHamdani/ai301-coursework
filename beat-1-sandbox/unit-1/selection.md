@@ -1,86 +1,58 @@
+ 
 # Unit 1 — Issue Selection
-
-Path: `beat-1-sandbox/unit-1/selection.md`
-
-Record of the issue carried into Unit 2, and of the evaluation runs that produced
-`eval-run.txt`. This file is graded at the path above; a copy kept anywhere else in
-the repository is not read.
-
-Complete every labelled field below. Each is graded on its own; content placed under the
-wrong label is not graded.
-
----
 
 ## Selected issue
 
 **Issue link**
-
-[The individual Path Review issue page. A link to the repository or the issue list
-does not satisfy this field.]
+https://github.com/codepath/pathreview-ai301-fa26-s1/issues/18
 
 **Verdict output**
-
-[Your skill's live-mode output for this issue, pasted verbatim and ending with the
-fenced JSON verdict block. A summary does not satisfy this field.]
-
-**The verdict must record `accept` for this issue.** Choose an issue your own skill
-accepts. If your skill rejects every candidate you try, that is a signal about your
-rubric rather than about the issues: revise it and re-run — retries are unlimited and a
-partial re-run costs about $0.20 — or run the skill on different candidates. Output
-recording `reject` for the issue you chose earns no credit for this field.
+```json
+[
+  {
+    "item": "[https://github.com/codepath/pathreview-ai301-fa26-s1/issues/18](https://github.com/codepath/pathreview-ai301-fa26-s1/issues/18)",
+    "checks": [
+      {"name": "maintainer-alive", "grade": "pass", "evidence": "@Aburke225 (Member) committed 2026-09-16, within 90-day window"},
+      {"name": "repo-in-use", "grade": "pass", "evidence": "Last commit 2026-09-16, within 6 months"},
+      {"name": "scope-fits", "grade": "pass", "evidence": "Bounded enhancement: two named files, 2-4h estimate, not an umbrella or epic"},
+      {"name": "unclaimed", "grade": "pass", "evidence": "No assignees; no linked PRs found"},
+      {"name": "policy-allows-ai", "grade": "pass", "evidence": "CONTRIBUTING.md makes no mention of AI; silence passes"}
+    ],
+    "verdict": "accept"
+  }
+]
 
 ```
-paste the output here, including the closing JSON block
-```
-
----
 
 ## Eval iterations
 
-Quote source text directly in each field below. Paraphrase does not satisfy them.
-
 **Run history**
 
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+* 16/20 scored items
+* 17/20 scored items
+* 18/20 scored items (PASS)
 
 **Issue analysis**
 
-[One scored issue, identified by id (`issue-01` through `issue-20`; the `calib-`
-issues are not scored). State your rubric's decision, the gold label, and the
-reasoning that produced your rubric's result.]
+* **Issue ID:** `issue-04`
+* **Gold Label:** accept
+* **My Verdict:** accept (initially rejected in earlier runs)
+* **Reasoning:** Initially, my rubric rejected this issue because the `scope-fits` check was too strict regarding bounded tasks. The issue asks for "Missing several basic rule previews" which is a specific list of fixes. By updating the rubric to explicitly accept "specific lists of fixes" and "standard bugs", the tool correctly analyzed it as a bounded, acceptable task.
 
 **Check rationale**
-
-[One check from the `rubric.md` uploaded to `tools/issue-select/`, quoted as it is
-currently written, with the reasoning behind its current form.]
+`| scope-fits | issue body and Comments section | accept standard bugs, feature tweaks, and specific lists of fixes; reject ONLY explicit "umbrella", "epic", or open-ended support questions | required |`
+**Reasoning:** The previous wording caused the tool to reject valid, simple bugs by mistakenly treating them as broad or vague. This updated wording gives the AI explicit permission to accept normal bugs and limits rejection strictly to obvious large-scale projects.
 
 **Trade-offs**
-
-[What the quoted check gives up. Any one of these is a complete answer: an issue whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
-
----
+By making the `scope-fits` check more lenient to correctly accept valid bugs like `issue-04` and `issue-19`, the trade-off is that the tool now incorrectly accepts `issue-15` and `issue-20`. It occasionally allows slightly ambiguous or larger issues to pass in order to avoid missing clear, good first issues.
 
 ## Selection rationale
 
-Graded on whether all three are answered, in your own words. Not on how good the
-reasoning is, and not on length — a short honest answer to each earns the full marks.
-This is also the basis for the claim comment you write in Unit 2.
+1. **The issue's fit to your interests and to the time available:**
+As someone with experience building AI agents and working with LangChain, this issue is a perfect fit. It involves fixing data flow (passing a file list) into the `Repo analyzer` agent. It is a bounded enhancement estimated at 2-4 hours, which perfectly matches my schedule for Unit 2.
+2. **What the verdict identified correctly, and what you weighed that the rubric could not:**
+The verdict correctly identified that the repository is active, the maintainer is present, and there are no competing pull requests. However, I personally weighed the actual logic of the codebase. The rubric cannot assess my familiarity with AI agents, but I manually verified that I understand how agent tools receive inputs and feel confident debugging this.
+3. **The anticipated difficulty in claiming it:**
+I don't anticipate any administrative difficulty in claiming it since there are no current assignees. The main technical challenge will be setting up the local agent environment and tracing the execution flow to see exactly where the file list is being dropped.
 
-**Selection rationale**
-
-[Answer all three:
-
-1. The issue's fit to your interests and to the time available.
-2. What the verdict identified correctly, and what you weighed that the rubric could
-   not.
-3. The anticipated difficulty in claiming it.]
-
----
-
-Related paths: `eval-run.txt` in this directory; your skill's files in
-`tools/issue-select/`.
+ 
