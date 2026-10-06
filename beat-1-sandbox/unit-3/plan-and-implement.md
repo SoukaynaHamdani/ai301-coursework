@@ -1,79 +1,45 @@
-# Unit 3 — Plan and Build
+# Unit 3: Plan and Implement
 
-Path: `beat-1-sandbox/unit-3/plan-and-implement.md`
+## 1. GitHub username
+ SoukaynaHamdani
+## 2. Plan comment
+**Link to comment:** `https://github.com/codepath/pathreview-ai301-fa26-s1/issues/18#issuecomment-6003917077`
 
-Record of your plan, the branch you built it on, and the evaluation runs that produced
-`eval-run.txt`. This file is graded at the path above; a copy kept anywhere else in the
-repository is not read.
+**Pasted text:**
+### Implementation Plan for Issue #18
 
-Complete every labelled field below. Each is graded on its own; content placed under the wrong
-label is not graded.
+I am claiming Issue #18 and have drafted a plan to fix the missing `file_structure` key in `GitHubTool._fetch_repo_metadata()`.
 
----
+#### Approach:
+1. **Fix Upstream Extraction:** Update `agent/tools/github_tool.py` to properly query and include the `file_structure` payload.
+2. **Analyzer Verification:** Verify that `ingestion/parsers/repo_analyzer.py` correctly reads the structured tree to evaluate `has_tests` and `has_ci`.
+3. **Testing:** Add targeted regression checks in `tests/test_github_tool.py`.
 
-## Posted upstream
+*AI-use disclosure:* AI assistance was utilized to draft this implementation plan and structure unit test scaffolding. Branch target: `fix/18-fix-file-structure`.
 
-**GitHub username**
+Looking forward to your feedback!
 
-[Your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comment upstream is identified by this name, and it is
-the only thing that ties it to you. Several students may plan the same
-house issue, so this is what keeps their comments off your score and
-yours off theirs.]
+## 3. Branch
+`fix/18-fix-file-structure`
 
-**Plan comment**
-
-[Link to the comment where you posted your plan on the issue. Use the comment's own
-permalink. **Then paste the text of that comment underneath the link** — the pasted text is
-what this field is graded on, so copy across what you actually posted.]
-
----
-
-## Your branch
-
-**Branch**
-
-[The name of the branch you built the change on, exactly as it appears in your fork. The
-naming shape is a type prefix, then the issue number, then a short description. **The issue
-number in the branch name must be the number of the issue you claimed** — a name carrying
-any other number does not satisfy this field.]
-
-**Evidence**
-
-[Your Unit 2 reproduction steps re-run against the built change: the before, then the
-after. Paste both, including the commands you ran and their output.]
+## 4. Evidence
+**Before the fix (Bug Case):**
+```text
+Keys returned: ['name', 'description', 'primary_language', 'star_count', 'fork_count', 'open_issues_count', 'last_commit_date', 'has_readme', 'topics', 'homepage']
+'file_structure' in data? False
+has_tests: False, has_ci: False
 
 ## Eval iterations
 
-Answer all four sections. Quote source text directly; paraphrase does not satisfy these
-fields.
-
 **Run history**
-
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
+Run 1: 14/20, Run 2: 16/20, Run 3: 18/20
 
 **Package analysis**
-
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
+I analyzed `pkg-14`. My rubric's verdict was "reject", but the gold label was "accept". My rubric read it this way because the package failed the `diagnosis-grounded` and `executable-by-a-stranger` checks. The rubric was likely too strict in parsing the root cause and expecting exact file paths, causing it to reject a plan that a human reviewer would consider a safe, clear accept.
 
 **Check rationale**
-
-[Quote one check from the `rubric.md` you uploaded to `tools/plan-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
+Check: "executable-by-a-stranger:  The files, approach, and order of work sections in the plan | Names the exact files to touch and a clear step-by-step approach so that another engineer could start executing it directly."
+Rationale: It reads this way because earlier iterations of the rubric were too loose and accepted plans that only vaguely described the work (e.g., "update the parser"). I revised it to require specific, unambiguous steps and exact file paths so that any developer could implement it without guessing.
 
 **Trade-offs**
-
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
-
----
-
-Related paths: `plan.md` and `eval-run.txt` in this directory; your skill's files in
-`tools/plan-check/`.
+By strictly requiring exact steps and precise file paths in the `executable-by-a-stranger` check, the rubric gives up flexibility. The direct trade-off is evident in `pkg-14`: it caused my rubric to reject a perfectly acceptable plan simply because the formatting or file path specificity didn't perfectly match the rigid rule, even though a human would easily understand the intent.
