@@ -18,8 +18,7 @@ SoukaynaHamdani
 * **Link:**  https://github.com/codepath/pathreview-ai301-fa26-s1/issues/18#issuecomment-5878722821
 * **Text:**
 
-```text
-Hi everyone, I want to sincerely apologize. My previous comment accidentally matched an earlier draft while I was reviewing notes. 
+```text  
 
 I'm claiming Issue #18 regarding the repo analyzer failing to detect tests and CI. To add independent value to this thread, I will investigate the data flow between GitHubTool._fetch_repo_metadata() and RepoAnalyzer.parse(), specifically verifying why the file_structure key is missing and testing both the default behavior and a control case. I'll share my report shortly!
 
